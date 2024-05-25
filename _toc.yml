@@ -1,9 +1,16 @@
 format: jb-book
 root: README
 parts:
-  - caption: Preamble
+  - caption: Logistics + Information
     chapters:
-      - file: notebooks/how-to-cite
-  - caption: Introduction
+      - file: schedule
+      - file: best-practices
+  - caption: Assignments
     chapters:
-      - file: notebooks/notebook-template
+      - file: notebooks/assignments/assignment_one
+  - caption: Solutions
+    chapters:
+      - file: notebooks/solutions/notebook-template
+  - caption: Final Project
+    chapters:
+      - file: notebooks/project/hyperlocal-final-project
