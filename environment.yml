@@ -1,7 +1,27 @@
-name: cookbook-dev
+name: hyperlocal-obs-dev
 channels:
   - conda-forge
+  - defaults
+  - pyviz
 dependencies:
-  - jupyter-book
+  - arm_pyart
+  - act-atmos
+  - matplotlib
   - jupyterlab
-  - sphinx-pythia-theme
+  - cartopy
+  - numpy
+  - dask
+  - distributed
+  - xarray
+  - pandas
+  - fiona
+  - hvplot
+  - imageio
+  - siphon
+  - scikit-learn
+  - pip
+  - pip:
+    - -r doc-requirements.txt
+    - ambient-api
+    - sage-data-client
+    - nexradaws

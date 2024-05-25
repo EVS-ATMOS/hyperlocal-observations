@@ -1,16 +1,19 @@
-<img src="thumbnail.png" alt="thumbnail" width="300"/>
+<img src="ANL_RGB-01.png" alt="thumbnail" width="300"/>
 
-# (Replace_with_your_title) Cookbook
+# (Hyperlocal Precipitation Observations) Cookbook
 
-[![nightly-build](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/ProjectPythia/cookbook-template/actions/workflows/nightly-build.yaml)
-[![Binder](https://binder.projectpythia.org/badge_logo.svg)](https://binder.projectpythia.org/v2/gh/ProjectPythia/cookbook-template/main?labpath=notebooks)
-[![DOI](https://zenodo.org/badge/475509405.svg)](https://zenodo.org/badge/latestdoi/475509405)
+[![nightly-build](https://github.com/EVS-ATMOS/hyperlocal-observations/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/EVS-ATMOS/hyperlocal-observations/actions/workflows/nightly-build.yaml)
 
-This Project Pythia Cookbook covers ... (replace `...` with the main subject of your cookbook ... e.g., _working with radar data in Python_)
+This Project Pythia Cookbook covers working with precipitation data transmitted via LoRaWAN. 
 
 ## Motivation
 
-(Add a few sentences stating why this cookbook will be useful. What skills will you, "the chef", gain once you have reached the end of the cookbook?)
+The spatial scale of preciptiation within an urban environment is difficult to observe due to the heteorgenius nature of the environment and phenomenon. 
+To accurately observe precipitaiton at the street scale within an urban environment, a distributed network of sensors is needed.
+
+This Summer 2024 Student Undergraduate Laboratory Internship (SULI) project aims to update the Community Research on Climate and Urban Science (CROCUS) in-situ 
+instrumentation to transmit via the LoRaWAN protocol, a Low Power Wide Area Networking communication protocol that functions on LoRa to allow for the capability
+to transmit data over a dense local network. 
 
 ## Authors
 
@@ -18,13 +21,11 @@ This Project Pythia Cookbook covers ... (replace `...` with the main subject of 
 
 ### Contributors
 
-<a href="https://github.com/ProjectPythia/cookbook-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ProjectPythia/cookbook-template" />
+<a href="https://github.com/EVS-ATMOS/hyperlocal-observations/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=EVS-ATMOS/hyperlocal-observations" />
 </a>
 
 ## Structure
-
-(State one or more sections that will comprise the notebook. E.g., _This cookbook is broken up into two main sections - "Foundations" and "Example Workflows."_ Then, describe each section below.)
 
 ### Section 1 ( Replace with the title of this section, e.g. "Foundations" )
 
@@ -61,20 +62,20 @@ If you are interested in running this material locally on your computer, you wil
 
 (Replace "cookbook-example" with the title of your cookbooks)
 
-1. Clone the `https://github.com/ProjectPythia/cookbook-example` repository:
+1. Clone the `https://github.com/EVS-ATMOS/hyperlocal-observations.git` repository:
 
    ```bash
-    git clone https://github.com/ProjectPythia/cookbook-example.git
+    git clone https://github.com/EVS-ATMOS/hyperlocal-observations.git
    ```
 
-1. Move into the `cookbook-example` directory
+1. Move into the `hyperlocal-observations` directory
    ```bash
-   cd cookbook-example
+   cd hyperlocal-observations
    ```
 1. Create and activate your conda environment from the `environment.yml` file
    ```bash
    conda env create -f environment.yml
-   conda activate cookbook-example
+   conda activate hyperlocal-obs-dev
    ```
 1. Move into the `notebooks` directory and start up Jupyterlab
    ```bash
