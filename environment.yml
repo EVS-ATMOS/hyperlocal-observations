@@ -21,7 +21,6 @@ dependencies:
   - scikit-learn
   - pip
   - pip:
-    - -r doc-requirements.txt
     - ambient-api
     - sage-data-client
     - nexradaws
