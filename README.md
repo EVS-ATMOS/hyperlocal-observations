@@ -1,6 +1,6 @@
 <img src="ANL_RGB-01.png" alt="thumbnail" width="300"/>
 
-# (Hyperlocal Precipitation Observations) Cookbook
+# Hyperlocal Precipitation Observations Cookbook
 
 [![nightly-build](https://github.com/EVS-ATMOS/hyperlocal-observations/actions/workflows/nightly-build.yaml/badge.svg)](https://github.com/EVS-ATMOS/hyperlocal-observations/actions/workflows/nightly-build.yaml)
 
@@ -17,7 +17,7 @@ to transmit data over a dense local network.
 
 ## Authors
 
-[First Author](@first-author), [Second Author](@second-author), etc. _Acknowledge primary content authors here_
+[Joe O'Brien](@jrobrien91), [Brandon Weart](@second-author), etc. _Acknowledge primary content authors here_
 
 ### Contributors
 
