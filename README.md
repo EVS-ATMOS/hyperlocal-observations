@@ -8,7 +8,7 @@ This Project Pythia Cookbook covers working with precipitation data transmitted 
 
 ## Motivation
 
-The spatial scale of preciptiation within an urban environment is difficult to observe due to the heteorgenius nature of the environment and phenomenon. 
+The spatial scale of preciptiation within an urban environment is difficult to observe due to the heteorgeneous nature of the environment and phenomenon. 
 To accurately observe precipitaiton at the street scale within an urban environment, a distributed network of sensors is needed.
 
 This Summer 2024 Student Undergraduate Laboratory Internship (SULI) project aims to update the Community Research on Climate and Urban Science (CROCUS) in-situ 
@@ -47,7 +47,7 @@ The simplest way to interact with a Jupyter Notebook is through
 important for now. All you need to know is how to launch a Pythia
 Cookbooks chapter via Binder. Simply navigate your mouse to
 the top right corner of the book chapter you are viewing and click
-on the rocket ship icon, (see figure below), and be sure to select
+on the rocket ship icon (see figure below), and be sure to select
 “launch Binder”. After a moment you should be presented with a
 notebook that you can interact with. I.e. you’ll be able to execute
 and even change the example programs. You’ll see that the code cells
