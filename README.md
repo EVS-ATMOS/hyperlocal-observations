@@ -27,13 +27,13 @@ to transmit data over a dense local network.
 
 ## Structure
 
-### Section 1 ( Replace with the title of this section, e.g. "Foundations" )
+### Foundations:
 
-(Add content for this section, e.g., "The foundational content includes ... ")
+  The foundational content includes...
 
-### Section 2 ( Replace with the title of this section, e.g. "Example workflows" )
+### Example Workflows:
 
-(Add content for this section, e.g., "Example workflows include ... ")
+  Example workflows include...
 
 ## Running the Notebooks
 
