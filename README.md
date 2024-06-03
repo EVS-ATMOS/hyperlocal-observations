@@ -11,13 +11,12 @@ This Project Pythia Cookbook covers working with precipitation data transmitted 
 The spatial scale of preciptiation within an urban environment is difficult to observe due to the heteorgeneous nature of the environment and phenomenon. 
 To accurately observe precipitaiton at the street scale within an urban environment, a distributed network of sensors is needed.
 
-This Summer 2024 Student Undergraduate Laboratory Internship (SULI) project aims to update the Community Research on Climate and Urban Science (CROCUS) in-situ 
-instrumentation to transmit via the LoRaWAN protocol, a Low Power Wide Area Networking communication protocol that functions on LoRa to allow for the capability
-to transmit data over a dense local network. 
+This Summer 2024 [Student Undergraduate Laboratory Internship (SULI)](https://science.osti.gov/wdts/suli) project aims to update the [Argonne Testbed for Multi-Scale Observational Science (ATMOS)](https://www.anl.gov/evs/atmos) in-situ 
+instrumentation to transmit via a Low Power Wide Area Networking communication protocol that functions on LoRa to allow for the capability to transmit data over a dense local network. 
 
 ## Authors
 
-[Joe O'Brien](@jrobrien91), [Brandon Weart](@second-author), etc. _Acknowledge primary content authors here_
+[Joe O'Brien](https://github.com/jrobrien91) and [Brandon Weart](https://github.com/BrandonWeart)
 
 ### Contributors
 
@@ -27,13 +26,18 @@ to transmit data over a dense local network.
 
 ## Structure
 
-### Foundations:
+### Logistics + Information:
+  General Information for this Summer 2024 SULI Project, which includes the overall schedule and documentation. 
 
-  The foundational content includes...
+### Assignments:
+  Throughout the internship, tasks will be assigned to encourage development of the project and progress the science. Each assignment should contribute to the overall Final Project cookbook, but may contain more exploritory methods to assist.
+  
+### Solutions:
+  Notebooks with solutions to the assigned tasks, allowing for continued experience with Github and conducting research in a collaborative manner. 
 
-### Example Workflows:
+### Final Project:
+  Including the final poster and report required by the SULI program, a comprehensive Jupyter Notebook highlighting this research is required. The final notebook should allow a future researcher to continue this project in the future. 
 
-  Example workflows include...
 
 ## Running the Notebooks
 
