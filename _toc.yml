@@ -7,7 +7,7 @@ parts:
     - file: best-practices
 - caption: Assignments
   chapters:
-    - file: notebooks/assignments/assignment_one
+    - file: notebooks/assignments/pyart-blog
 - caption: Solutions
   chapters:
     - file: notebooks/solutions/notebook-template
