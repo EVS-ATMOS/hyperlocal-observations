@@ -15,7 +15,7 @@
 | ANL  Seminar Series 				| Wednesday; 9 - 10am                 	         		   	|                                    |
 | DOE  Seminar Series 				| Wednesday; 12 - 1pm        	                  		   	|                                    |
 | [Intro to Literature Review](./documents/Anderson_journal_club.pdf)			| Discussion on how to conduct a literature review 		   	| Monday,  3 June 2024 (virtual)     |
-| Intro to CROCUS Instruments			| Hands-On Tour to discuss instrumentation         		   	| Tuesday, 4 June 2024 (hands-on)    |
+| [Intro to CROCUS Instruments](./documents/SULI_Summer2024_CROCUS_MST.pptx)			| Hands-On Tour to discuss instrumentation         		   	| Tuesday, 4 June 2024 (hands-on)    |
 | Literature Review 1: Chicago Precip   	| Literature Review of Climo and Extreme Precip in Chicago         	| Friday,  7 June 2024               |
 | Open Source Software 1: Intro to Github	| Assignment 1 to get gain experience on Github / Jupyter Notebooks	| Friday,  7 June 2024               |
 
