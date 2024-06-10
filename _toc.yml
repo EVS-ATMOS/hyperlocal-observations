@@ -6,7 +6,7 @@ parts:
     - file: schedule
 - caption: Exploration
   chapters:
-    - file: SensorTest
+    - file: notebooks/Exploration/SensorTest
 - caption: Assignments
   chapters:
     - file: notebooks/assignments/pyart-blog
