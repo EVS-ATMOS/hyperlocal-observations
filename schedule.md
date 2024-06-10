@@ -15,7 +15,7 @@
 | ANL  Seminar Series 				| Wednesday; 9 - 10am                 	         		   	|                                    |
 | DOE  Seminar Series 				| Wednesday; 12 - 1pm        	                  		   	|                                    |
 | [Intro to Literature Review](./documents/Anderson_journal_club.pdf)			| Discussion on how to conduct a literature review 		   	| Monday,  3 June 2024 (virtual)     |
-| [Intro to CROCUS Instruments](https://docs.google.com/presentation/d/148lsRw2jqpmiE-98JAEi7Z3WSYwWXofa/edit?usp=sharing&ouid=116080427022902813926&rtpof=true&sd=true)			| Hands-On Tour to discuss instrumentation         		   	| Tuesday, 4 June 2024 (hands-on)    |
+| [Intro to ATMOS](https://www.anl.gov/evs/atmos/about)			| Hands-On Tour to discuss the Argonne Testbed for Multiscale Observational Science         		   	| Tuesday, 4 June 2024 (hands-on)    |
 | Literature Review 1: Chicago Precip   	| Literature Review of Climo and Extreme Precip in Chicago         	| Friday,  7 June 2024               |
 | Open Source Software 1: Intro to Github	| Assignment 1 to get gain experience on Github / Jupyter Notebooks	| Friday,  7 June 2024               |
 
@@ -25,7 +25,8 @@
 | :---:               			        |    :----:                              				       |    :---:                           |
 | ANL  Seminar Series 				| Wednesday; 9 - 10am                   				       |                                    |
 | DOE  Seminar Series 				| Wednesday; 12 - 1pm                   				       |                                    |
-| Intro to Instrumentation Communication	| Discussion on how instruments communicate via Serial & LoRaWAN 	       | Monday, 10 June 2024 (virtual)     |
+| [Intro to CROCUS Instruments](https://docs.google.com/presentation/d/148lsRw2jqpmiE-98JAEi7Z3WSYwWXofa/edit?usp=sharing&ouid=116080427022902813926&rtpof=true&sd=true)			| Discussion on instrumentation used within this study        		   	| Monday, 10 June 2024 (virtual)    |
+| Intro to Instrumentation Communication	| Discussion on how instruments communicate via Serial & LoRaWAN 	       | Wednesday, 12 June 2024 (in-person)     |
 | Literature Review 2: Spatial Distribution   	| Literature Review of Spatial Distribution of Precipitation                   | Friday, 14 June 2024               |
 | Open Source Software 2: Reading CROCUS Data	| Assignment 2 to get gain experience reading data 		    	       | Friday, 14 June 2024               |
 | Final Report Writing 1 - Introduction         | Using Lit Review 1 & 2, write final report introduction		       | Friday, 14 June 2024               |
