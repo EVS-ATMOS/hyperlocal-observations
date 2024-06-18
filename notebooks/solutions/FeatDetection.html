@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection. &#8212; Summer 2024 DOE SULI Project - Hyperlocal Precipitation Observations</title>
+    <title>Radar Reflectivity Feature Detection and Classification &#8212; Summer 2024 DOE SULI Project - Hyperlocal Precipitation Observations</title>
   
   
   
@@ -61,8 +61,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/solutions/FeatDetection';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Overview" href="VertCol.html" />
-    <link rel="prev" title="Overview" href="PPI_Notebook.html" />
+    <link rel="next" title="Vertical Reflectivity Columns" href="VertCol.html" />
+    <link rel="prev" title="NEXRAD Level 2 Radar Data Animated GIFs" href="PPI_Notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <meta name="docbuild:last-update" content="18 June 2024"/>
@@ -213,10 +213,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/pyart-blog.html">Assignment 1 : Py-ART Blog Post</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/insitu-comparison.html">Assignment 2 : Radar / In-Situ Observation Comparison</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="AnimatedPyARTBlg.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PPI_Notebook.html">NEXRAD Level 2 Radar Data Animated GIFs</a></li>
 
 
 
@@ -224,24 +225,13 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="PPI_Notebook.html">Overview</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Radar Reflectivity Feature Detection and Classification</a></li>
 
 
 
 
 
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a></li>
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="VertCol.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VertCol.html">Vertical Reflectivity Columns</a></li>
 
 
 
@@ -250,7 +240,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Project</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../project/hyperlocal-final-project.html">Project Pythia Notebook Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/hyperlocal-final-project.html">Final Project - Hyperlocal Preciptiation Analysis</a></li>
 </ul>
 
     </div>
@@ -453,7 +443,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</h1>
+    <h1>Radar Reflectivity Feature Detection and Classification</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -463,17 +453,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html">If you would like to know more about how feature detection in Py-ART works and what exactly it does in detail, visit https://arm-doe.github.io/pyart/examples/retrieve/plot_convective_stratiform.html</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Radar Reflectivity Feature Detection and Classification</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-this-notebook-we-will-cover-review">Within this notebook, we will cover/review:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-animated-gifs-with-acquired-radar-data-from-py-art">1: How to create animated gifs with acquired radar data from Py-ART</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-the-feature-detection-algorithm-to-compare-against-reflectivity">2: How to use the feature detection algorithm to compare against reflectivity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-ppi-gif-notebook-to-get-yourself-versed-with-making-gifs-in-py-art-as-much-of-the-setup-code-will-be-similar">Review the PPI GIF notebook to get yourself versed with making gifs in Py-ART, as much of the setup code will be similar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-ppi-gif-notebook-to-get-yourself-versed-with-making-gifs-in-py-art-as-much-of-the-setup-code-will-be-similar">Review the PPI GIF notebook to get yourself versed with making gifs in Py-ART, as much of the setup code will be similar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-that-we-know-how-to-create-animated-gifs-through-use-of-basic-python-syntax-and-the-py-art-package-we-will-learn-how-to-create-gifs-of-more-obscure-products-such-as-feature-detection">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html">If you would like to know more about how feature detection in Py-ART works and what exactly it does in detail, visit https://arm-doe.github.io/pyart/examples/retrieve/plot_convective_stratiform.html</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
@@ -507,17 +499,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p style="text-align: left; font-size: 32px; font-weight: bold;">
-    Making GIFs of dual-panel Feature Detection and Radar Reflectivity 
-</p>
-<section id="now-that-we-know-how-to-create-animated-gifs-through-use-of-basic-python-syntax-and-the-py-art-package-we-will-learn-how-to-create-gifs-of-more-obscure-products-such-as-feature-detection">
-<h1>Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.<a class="headerlink" href="#now-that-we-know-how-to-create-animated-gifs-through-use-of-basic-python-syntax-and-the-py-art-package-we-will-learn-how-to-create-gifs-of-more-obscure-products-such-as-feature-detection" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
-<section id="if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html">
-<h2>If you would like to know more about how feature detection in Py-ART works and what exactly it does in detail, visit https://arm-doe.github.io/pyart/examples/retrieve/plot_convective_stratiform.html<a class="headerlink" href="#if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="radar-reflectivity-feature-detection-and-classification">
+<h1>Radar Reflectivity Feature Detection and Classification<a class="headerlink" href="#radar-reflectivity-feature-detection-and-classification" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <section id="within-this-notebook-we-will-cover-review">
 <h2>Within this notebook, we will cover/review:<a class="headerlink" href="#within-this-notebook-we-will-cover-review" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <section id="how-to-create-animated-gifs-with-acquired-radar-data-from-py-art">
@@ -529,6 +512,12 @@ document.write(`
 </section>
 <section id="review-the-ppi-gif-notebook-to-get-yourself-versed-with-making-gifs-in-py-art-as-much-of-the-setup-code-will-be-similar">
 <h2>Review the PPI GIF notebook to get yourself versed with making gifs in Py-ART, as much of the setup code will be similar<a class="headerlink" href="#review-the-ppi-gif-notebook-to-get-yourself-versed-with-making-gifs-in-py-art-as-much-of-the-setup-code-will-be-similar" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<section id="now-that-we-know-how-to-create-animated-gifs-through-use-of-basic-python-syntax-and-the-py-art-package-we-will-learn-how-to-create-gifs-of-more-obscure-products-such-as-feature-detection">
+<h3>Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.<a class="headerlink" href="#now-that-we-know-how-to-create-animated-gifs-through-use-of-basic-python-syntax-and-the-py-art-package-we-will-learn-how-to-create-gifs-of-more-obscure-products-such-as-feature-detection" title="Link to this heading"><i class="fas fa-link"></i></a></h3>
+<section id="if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html">
+<h4>If you would like to know more about how feature detection in Py-ART works and what exactly it does in detail, visit https://arm-doe.github.io/pyart/examples/retrieve/plot_convective_stratiform.html<a class="headerlink" href="#if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html" title="Link to this heading"><i class="fas fa-link"></i></a></h4>
+</section>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="prerequisites">
@@ -1045,16 +1034,16 @@ complete)</p>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "crocusenv"
+            mode: "python"
         },
         kernelOptions: {
-            name: "crocusenv",
+            name: "python3",
             path: "./notebooks/solutions"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'crocusenv'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -1072,7 +1061,7 @@ complete)</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">NEXRAD Level 2 Radar Data Animated GIFs</p>
       </div>
     </a>
     <a class="right-next"
@@ -1080,7 +1069,7 @@ complete)</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">Vertical Reflectivity Columns</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1100,17 +1089,19 @@ complete)</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html">If you would like to know more about how feature detection in Py-ART works and what exactly it does in detail, visit https://arm-doe.github.io/pyart/examples/retrieve/plot_convective_stratiform.html</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Radar Reflectivity Feature Detection and Classification</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-this-notebook-we-will-cover-review">Within this notebook, we will cover/review:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-animated-gifs-with-acquired-radar-data-from-py-art">1: How to create animated gifs with acquired radar data from Py-ART</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-the-feature-detection-algorithm-to-compare-against-reflectivity">2: How to use the feature detection algorithm to compare against reflectivity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-ppi-gif-notebook-to-get-yourself-versed-with-making-gifs-in-py-art-as-much-of-the-setup-code-will-be-similar">Review the PPI GIF notebook to get yourself versed with making gifs in Py-ART, as much of the setup code will be similar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-ppi-gif-notebook-to-get-yourself-versed-with-making-gifs-in-py-art-as-much-of-the-setup-code-will-be-similar">Review the PPI GIF notebook to get yourself versed with making gifs in Py-ART, as much of the setup code will be similar</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-that-we-know-how-to-create-animated-gifs-through-use-of-basic-python-syntax-and-the-py-art-package-we-will-learn-how-to-create-gifs-of-more-obscure-products-such-as-feature-detection">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-you-would-like-to-know-more-about-how-feature-detection-in-py-art-works-and-what-exactly-it-does-in-detail-visit-https-arm-doe-github-io-pyart-examples-retrieve-plot-convective-stratiform-html">If you would like to know more about how feature detection in Py-ART works and what exactly it does in detail, visit https://arm-doe.github.io/pyart/examples/retrieve/plot_convective_stratiform.html</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>

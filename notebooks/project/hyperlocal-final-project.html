@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Project Pythia Notebook Template &#8212; Summer 2024 DOE SULI Project - Hyperlocal Precipitation Observations</title>
+    <title>Final Project - Hyperlocal Preciptiation Analysis &#8212; Summer 2024 DOE SULI Project - Hyperlocal Precipitation Observations</title>
   
   
   
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/project/hyperlocal-final-project';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Overview" href="../solutions/VertCol.html" />
+    <link rel="prev" title="Vertical Reflectivity Columns" href="../solutions/VertCol.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <meta name="docbuild:last-update" content="18 June 2024"/>
@@ -214,10 +214,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/pyart-blog.html">Assignment 1 : Py-ART Blog Post</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/insitu-comparison.html">Assignment 2 : Radar / In-Situ Observation Comparison</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../solutions/AnimatedPyARTBlg.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/PPI_Notebook.html">NEXRAD Level 2 Radar Data Animated GIFs</a></li>
 
 
 
@@ -225,24 +226,13 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="../solutions/PPI_Notebook.html">Overview</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../solutions/FeatDetection.html">Radar Reflectivity Feature Detection and Classification</a></li>
 
 
 
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="../solutions/FeatDetection.html">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a></li>
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../solutions/VertCol.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solutions/VertCol.html">Vertical Reflectivity Columns</a></li>
 
 
 
@@ -251,7 +241,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Project</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project Pythia Notebook Template</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Final Project - Hyperlocal Preciptiation Analysis</a></li>
 </ul>
 
     </div>
@@ -454,7 +444,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project Pythia Notebook Template</h1>
+    <h1>Final Project - Hyperlocal Preciptiation Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -502,14 +492,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>Let’s start here! If you can directly link to an image relevant to your notebook, such as <a class="reference external" href="https://github.com/numpy/numpy/blob/main/doc/source/_static/numpylogo.svg">canonical logos</a>, do so here at the top of your notebook. You can do this with Markdown syntax,</p>
+  <p>Let’s start here! If you can directly link to an image relevant to your notebook, do so here at the top of your notebook. You can do this with Markdown syntax,</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">![&lt;image</span> <span class="pre">title&gt;](http://link.com/to/image.png</span> <span class="pre">&quot;image</span> <span class="pre">alt</span> <span class="pre">text&quot;)</span></code></p>
 </div></blockquote>
 <p>or edit this cell to see raw HTML <code class="docutils literal notranslate"><span class="pre">img</span></code> demonstration. This is preferred if you need to shrink your embedded image. <strong>Either way be sure to include <code class="docutils literal notranslate"><span class="pre">alt</span></code> text for any embedded images to make your content more accessible.</strong></p>
-<p><a class="reference internal" href="notebooks/project/images/ProjectPythia_Logo_Final-01-Blue.svg"><img alt="Project Pythia Logo" src="notebooks/project/images/ProjectPythia_Logo_Final-01-Blue.svg" width="250" /></a></img></p>
-<section class="tex2jax_ignore mathjax_ignore" id="project-pythia-notebook-template">
-<h1>Project Pythia Notebook Template<a class="headerlink" href="#project-pythia-notebook-template" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="final-project-hyperlocal-preciptiation-analysis">
+<h1>Final Project - Hyperlocal Preciptiation Analysis<a class="headerlink" href="#final-project-hyperlocal-preciptiation-analysis" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <p>Next, title your notebook appropriately with a top-level Markdown header, <code class="docutils literal notranslate"><span class="pre">#</span></code>. Do not use this level header anywhere else in the notebook. Our book build process will use this title in the navbar, table of contents, etc. Keep it short, keep it descriptive. Follow this with a <code class="docutils literal notranslate"><span class="pre">---</span></code> cell to visually distinguish the transition to the prerequisites section.</p>
 <hr class="docutils" />
 <section id="overview">
@@ -614,8 +603,8 @@ document.write(`
 <section id="header-levels">
 <h6>header levels<a class="headerlink" href="#header-levels" title="Link to this heading"><i class="fas fa-link"></i></a></h6>
 <p>as well <span class="math notranslate nohighlight">\(m = a * t / h\)</span> text! Similarly, you have access to other <span class="math notranslate nohighlight">\(\LaTeX\)</span> equation <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting%20Equations.html"><strong>functionality</strong></a> via MathJax (demo below from link),</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3801d9a-1d54-4169-b105-28cd031aa0f5">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c3801d9a-1d54-4169-b105-28cd031aa0f5" title="Permalink to this equation"><i class="fas fa-link"></i></a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a3b7c419-a244-4ac7-972f-54efdcd74104">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a3b7c419-a244-4ac7-972f-54efdcd74104" title="Permalink to this equation"><i class="fas fa-link"></i></a></span>\[\begin{align}
 \dot{x} &amp; = \sigma(y-x) \\
 \dot{y} &amp; = \rho x - y - xz \\
 \dot{z} &amp; = -\beta z + xy
@@ -707,7 +696,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Overview</p>
+        <p class="prev-next-title">Vertical Reflectivity Columns</p>
       </div>
     </a>
 </div>

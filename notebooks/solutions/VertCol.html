@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; Summer 2024 DOE SULI Project - Hyperlocal Precipitation Observations</title>
+    <title>Vertical Reflectivity Columns &#8212; Summer 2024 DOE SULI Project - Hyperlocal Precipitation Observations</title>
   
   
   
@@ -61,8 +61,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/solutions/VertCol';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Project Pythia Notebook Template" href="../project/hyperlocal-final-project.html" />
-    <link rel="prev" title="Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection." href="FeatDetection.html" />
+    <link rel="next" title="Final Project - Hyperlocal Preciptiation Analysis" href="../project/hyperlocal-final-project.html" />
+    <link rel="prev" title="Radar Reflectivity Feature Detection and Classification" href="FeatDetection.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
     <meta name="docbuild:last-update" content="18 June 2024"/>
@@ -213,10 +213,11 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/pyart-blog.html">Assignment 1 : Py-ART Blog Post</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/insitu-comparison.html">Assignment 2 : Radar / In-Situ Observation Comparison</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Solutions</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="AnimatedPyARTBlg.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PPI_Notebook.html">NEXRAD Level 2 Radar Data Animated GIFs</a></li>
 
 
 
@@ -224,24 +225,13 @@
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="PPI_Notebook.html">Overview</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="FeatDetection.html">Radar Reflectivity Feature Detection and Classification</a></li>
 
 
 
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="FeatDetection.html">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</a></li>
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Vertical Reflectivity Columns</a></li>
 
 
 
@@ -250,7 +240,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Project</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../project/hyperlocal-final-project.html">Project Pythia Notebook Template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../project/hyperlocal-final-project.html">Final Project - Hyperlocal Preciptiation Analysis</a></li>
 </ul>
 
     </div>
@@ -453,7 +443,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview</h1>
+    <h1>Vertical Reflectivity Columns</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -463,7 +453,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Vertical Reflectivity Columns</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-this-notebook-we-will-cover">Within this notebook, we will cover:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-complex-plot-with-vertical-reflectivity-columns-for-specified-points-reflectivity-ppi-and-derived-rainfall-rate">1. How to create a complex plot with vertical reflectivity columns for specified points, reflectivity PPI, and derived rainfall rate.</a></li>
 </ul>
@@ -508,10 +498,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p style="text-align: left; font-size: 32px; font-weight: bold;">
-    Creating animated gifs of vertical reflectivity columns on advanced complex plots
-</p><section class="tex2jax_ignore mathjax_ignore" id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="vertical-reflectivity-columns">
+<h1>Vertical Reflectivity Columns<a class="headerlink" href="#vertical-reflectivity-columns" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <section id="within-this-notebook-we-will-cover">
 <h2>Within this notebook, we will cover:<a class="headerlink" href="#within-this-notebook-we-will-cover" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <section id="how-to-create-a-complex-plot-with-vertical-reflectivity-columns-for-specified-points-reflectivity-ppi-and-derived-rainfall-rate">
@@ -1395,16 +1383,16 @@ An annotation will appear in the top right corner of each of the rainfall rate b
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "crocusenv"
+            mode: "python"
         },
         kernelOptions: {
-            name: "crocusenv",
+            name: "python3",
             path: "./notebooks/solutions"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'crocusenv'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -1422,7 +1410,7 @@ An annotation will appear in the top right corner of each of the rainfall rate b
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Now that we know how to create animated gifs through use of basic python syntax and the Py-ART package, we will learn how to create GIFs of more obscure products such as feature detection.</p>
+        <p class="prev-next-title">Radar Reflectivity Feature Detection and Classification</p>
       </div>
     </a>
     <a class="right-next"
@@ -1430,7 +1418,7 @@ An annotation will appear in the top right corner of each of the rainfall rate b
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Project Pythia Notebook Template</p>
+        <p class="prev-next-title">Final Project - Hyperlocal Preciptiation Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1450,7 +1438,7 @@ An annotation will appear in the top right corner of each of the rainfall rate b
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Vertical Reflectivity Columns</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-this-notebook-we-will-cover">Within this notebook, we will cover:</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-complex-plot-with-vertical-reflectivity-columns-for-specified-points-reflectivity-ppi-and-derived-rainfall-rate">1. How to create a complex plot with vertical reflectivity columns for specified points, reflectivity PPI, and derived rainfall rate.</a></li>
 </ul>
