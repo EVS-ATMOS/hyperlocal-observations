@@ -11,9 +11,9 @@ parts:
 - caption: Assignments
   chapters:
     - file: notebooks/assignments/pyart-blog
+    - file: notebooks/assignments/insitu-comparison
 - caption: Solutions
   chapters:
-    - file: notebooks/solutions/AnimatedPyARTBlg
     - file: notebooks/solutions/PPI_Notebook
     - file: notebooks/solutions/FeatDetection
     - file: notebooks/solutions/VertCol
