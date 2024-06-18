@@ -483,7 +483,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gif-creation">GIF creation</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#entire-code-block">Entire code block</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#entire-code-block">Entire code block</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-the-commented-print-statements-are-meant-for-debugging-and-keeping-track-of-the-process-the-breakdown-of-the-code-above-keeps-them-uncommented-but-for-the-sake-of-demonstration-i-have-commented-them-out-to-reduce-space-taken-up">*NOTE that the commented print statements are meant for debugging and keeping track of the process. The breakdown of the code above keeps them uncommented, but for the sake of demonstration, I have commented them out to reduce space taken up</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-comes-next">What comes next?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuing-the-saga-a-guide-on-how-to-make-vertical-columns-and-complex-plots-with-py-art-will-follow-make-sure-to-look-over-this-and-the-previous-ppi-gif-guide-to-better-understand">Continuing the saga, a guide on how to make vertical columns and complex plots with Py-ART will follow. Make sure to look over this and the previous PPI GIF guide to better understand</a></li>
@@ -581,6 +584,8 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">IPImage</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -597,6 +602,7 @@ document.write(`
 </div>
 <section id="we-will-use-most-of-the-same-code-for-setting-up-the-date-selection-file-grabbing-and-station-selection-stuff-as-the-ppi-guide">
 <h2>We will use most of the same code for setting up the date selection, file grabbing, and station selection stuff as the PPI guide.<a class="headerlink" href="#we-will-use-most-of-the-same-code-for-setting-up-the-date-selection-file-grabbing-and-station-selection-stuff-as-the-ppi-guide" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>This will also create a directory to save the frames into</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># example start date</span>
@@ -635,6 +641,8 @@ document.write(`
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to read radar data from </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
+<span class="n">frames_dir</span> <span class="o">=</span> <span class="s1">&#39;frames/Feature&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">frames_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
 </pre></div>
 </div>
@@ -755,7 +763,7 @@ complete)</p>
         <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 
     <span class="c1"># Save the plot to a file</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;detection_frame_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">frame_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;detection_frame_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Locations&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
@@ -764,14 +772,6 @@ complete)</p>
     <span class="c1"># Add the file to the frames list</span>
     <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved frame </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processing file 1/28: noaa-nexrad-level2/2024/06/05/KLOT/KLOT20240605_040442_V06
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KeyboardInterrupt
 </pre></div>
 </div>
 </div>
@@ -785,13 +785,16 @@ complete)</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">frames</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating animated GIF...&quot;</span><span class="p">)</span>
     <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">]</span>
-    <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;feature_detection.gif&#39;</span><span class="p">,</span> <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">duration</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>  <span class="c1"># duration in milliseconds</span>
+    <span class="n">gif_filename</span> <span class="o">=</span> <span class="s1">&#39;feature_detection.gif&#39;</span>
+    <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">gif_filename</span><span class="p">,</span> <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">duration</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># duration in milliseconds</span>
 
     <span class="c1"># Clean up the saved frames</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Animated GIF created as &#39;feature_detection.gif&#39;&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">gif_filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">IPImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;gif&#39;</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No frames were generated.&quot;</span><span class="p">)</span>
 </pre></div>
@@ -808,6 +811,8 @@ complete)</p>
 <section class="tex2jax_ignore mathjax_ignore" id="entire-code-block">
 <h1>Entire code block<a class="headerlink" href="#entire-code-block" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
 <p>A more detailed explanation of the functions of each section of the code can be found on the PPI notebook, as this is set up nearly the same</p>
+<section id="note-that-the-commented-print-statements-are-meant-for-debugging-and-keeping-track-of-the-process-the-breakdown-of-the-code-above-keeps-them-uncommented-but-for-the-sake-of-demonstration-i-have-commented-them-out-to-reduce-space-taken-up">
+<h2>*NOTE that the commented print statements are meant for debugging and keeping track of the process. The breakdown of the code above keeps them uncommented, but for the sake of demonstration, I have commented them out to reduce space taken up<a class="headerlink" href="#note-that-the-commented-print-statements-are-meant-for-debugging-and-keeping-track-of-the-process-the-breakdown-of-the-code-above-keeps-them-uncommented-but-for-the-sake-of-demonstration-i-have-commented-them-out-to-reduce-space-taken-up" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyart</span>
@@ -822,6 +827,8 @@ complete)</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">IPImage</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
@@ -830,7 +837,7 @@ complete)</p>
 
 <span class="c1"># Define the start and end dates and hours</span>
 <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># example start date</span>
-<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># example end date</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># example end date</span>
 <span class="n">station</span> <span class="o">=</span> <span class="s1">&#39;KLOT&#39;</span>
 
 <span class="c1"># Generate the list of files for the specified date and hour range</span>
@@ -840,13 +847,18 @@ complete)</p>
     <span class="n">date_str</span> <span class="o">=</span> <span class="n">current_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">datetime_str</span> <span class="o">=</span> <span class="n">current_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H&quot;</span><span class="p">)</span>
     <span class="n">hour_str</span> <span class="o">=</span> <span class="n">current_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H&quot;</span><span class="p">)</span>
-    <span class="n">files</span> <span class="o">+=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://noaa-nexrad-level2/</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">station</span><span class="si">}{</span><span class="n">datetime_str</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">))</span>
+    <span class="n">all_files</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://noaa-nexrad-level2/</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">station</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">station</span><span class="si">}{</span><span class="n">datetime_str</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">)</span>
+    <span class="n">filtered_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">all_files</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_MDM&#39;</span><span class="p">)]</span>
+    <span class="n">files</span> <span class="o">+=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">filtered_files</span><span class="p">)</span>
     <span class="n">current_time</span> <span class="o">+=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="c1"># Remove duplicates</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
+
 <span class="c1"># Print the selected files</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected files:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="c1">#print(&quot;Selected files:&quot;)</span>
+<span class="c1">#for file in files:</span>
+<span class="c1">#print(file)</span>
 
 <span class="n">latitude</span> <span class="o">=</span> <span class="p">[</span><span class="mf">41.700937896518866</span><span class="p">,</span> <span class="mf">41.704120</span><span class="p">]</span>
 <span class="n">longitude</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">87.99578103231573</span><span class="p">,</span> <span class="o">-</span><span class="mf">87.968328</span><span class="p">]</span>
@@ -860,15 +872,17 @@ complete)</p>
             <span class="n">radar_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="n">radar_file</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">radar_data</span><span class="p">)</span>
         <span class="n">radar</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_nexrad_archive</span><span class="p">(</span><span class="n">radar_file</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully read radar data from </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1">#print(f&quot;Successfully read radar data from {file_path}&quot;)</span>
         <span class="k">return</span> <span class="n">radar</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to read radar data from </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
 
+<span class="n">frames_dir</span> <span class="o">=</span> <span class="s1">&#39;frames/Feature&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">frames_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing file </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1">#print(f&quot;Processing file {i+1}/{len(files)}: {file}&quot;)</span>
     <span class="c1"># Read radar data</span>
     <span class="n">radar</span> <span class="o">=</span> <span class="n">read_radar_data</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">radar</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -876,7 +890,7 @@ complete)</p>
         <span class="k">continue</span>
 
     <span class="c1"># List available fields</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Available fields in radar data: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">radar</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1">#print(f&quot;Available fields in radar data: {list(radar.fields.keys())}&quot;)</span>
 
     <span class="c1"># Use a suitable field name based on available fields</span>
     <span class="n">field_name</span> <span class="o">=</span> <span class="s2">&quot;reflectivity&quot;</span>  <span class="c1"># Use &#39;reflectivity&#39; as the common field name</span>
@@ -925,7 +939,7 @@ complete)</p>
 
     <span class="c1"># Create plot using GridMapDisplay</span>
     <span class="c1"># Plot variables</span>
-    <span class="n">display</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">GridMapDisplay</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">grid_display</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">GridMapDisplay</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
     <span class="n">magma_r_cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;pyart_ChaseSpectral&quot;</span><span class="p">)</span>
     <span class="n">ref_cmap</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
         <span class="s2">&quot;ref_cmap&quot;</span><span class="p">,</span> <span class="n">magma_r_cmap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">magma_r_cmap</span><span class="o">.</span><span class="n">N</span><span class="p">))</span>
@@ -938,7 +952,7 @@ complete)</p>
     <span class="c1"># Plot</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
     <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span>
-    <span class="n">display</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">grid_display</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span>
         <span class="n">field_name</span><span class="p">,</span>
         <span class="n">vmin</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
         <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span>
@@ -947,7 +961,7 @@ complete)</p>
         <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span>
-    <span class="n">display</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span>
+    <span class="n">grid_display</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span>
         <span class="s2">&quot;feature_detection&quot;</span><span class="p">,</span>
         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
         <span class="n">vmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -971,7 +985,7 @@ complete)</p>
         <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 
     <span class="c1"># Save the plot to a file</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;detection_frame_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">frames_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;detection_frame_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Locations&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
@@ -979,25 +993,36 @@ complete)</p>
 
     <span class="c1"># Add the file to the frames list</span>
     <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved frame </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1">#print(f&quot;Saved frame {i+1}/{len(files)}: {filename}&quot;)</span>
 
 <span class="c1"># Create an animated GIF using Pillow</span>
 <span class="k">if</span> <span class="n">frames</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating animated GIF...&quot;</span><span class="p">)</span>
+    <span class="c1">#print(&quot;Creating animated GIF...&quot;)</span>
     <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">]</span>
-    <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;feature_detection.gif&#39;</span><span class="p">,</span> <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">duration</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>  <span class="c1"># duration in milliseconds</span>
+    <span class="n">gif_filename</span> <span class="o">=</span> <span class="s1">&#39;feature_detection.gif&#39;</span>
+    <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">gif_filename</span><span class="p">,</span> <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">duration</span><span class="o">=</span><span class="mi">325</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># duration in milliseconds</span>
 
     <span class="c1"># Clean up the saved frames</span>
     <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Animated GIF created as &#39;feature_detection.gif&#39;&quot;</span><span class="p">)</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">gif_filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">IPImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;gif&#39;</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No frames were generated.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Animated GIF created as &#39;feature_detection.gif&#39;
+</pre></div>
 </div>
+<img alt="../../_images/6c2725b9fca204d79247ff55df2c45276c5b35153cd1e24ffc774f9c512590af.gif" src="../../_images/6c2725b9fca204d79247ff55df2c45276c5b35153cd1e24ffc774f9c512590af.gif" />
+</div>
+</div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="summary">
 <h1>Summary<a class="headerlink" href="#summary" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
@@ -1095,7 +1120,10 @@ complete)</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gif-creation">GIF creation</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#entire-code-block">Entire code block</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#entire-code-block">Entire code block</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#note-that-the-commented-print-statements-are-meant-for-debugging-and-keeping-track-of-the-process-the-breakdown-of-the-code-above-keeps-them-uncommented-but-for-the-sake-of-demonstration-i-have-commented-them-out-to-reduce-space-taken-up">*NOTE that the commented print statements are meant for debugging and keeping track of the process. The breakdown of the code above keeps them uncommented, but for the sake of demonstration, I have commented them out to reduce space taken up</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-comes-next">What comes next?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuing-the-saga-a-guide-on-how-to-make-vertical-columns-and-complex-plots-with-py-art-will-follow-make-sure-to-look-over-this-and-the-previous-ppi-gif-guide-to-better-understand">Continuing the saga, a guide on how to make vertical columns and complex plots with Py-ART will follow. Make sure to look over this and the previous PPI GIF guide to better understand</a></li>
