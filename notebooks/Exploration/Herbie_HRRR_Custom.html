@@ -208,6 +208,7 @@
 
 
 
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -493,10 +494,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Downsampling the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smoothing-cape">Smoothing CAPE</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-code">Plotting Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vmin-and-vmax">Vmin and Vmax</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#function-for-the-creation-of-the-gif-from-the-created-frames-and-clean-up-of-frames-and-directory">Function for the creation of the GIF from the created frames and clean up of frames and directory</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-settings-and-creation-of-gif">Parameter settings and creation of GIF</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 
             </nav>
@@ -589,11 +592,10 @@ document.write(`
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 <span class="kn">from</span> <span class="nn">herbie</span> <span class="kn">import</span> <span class="n">Herbie</span><span class="p">,</span> <span class="n">wgrib2</span>
 <span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span>
-<span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">IPImage</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 
+<span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="n">MS_TO_KNOTS</span> <span class="o">=</span> <span class="mf">1.94384</span>
 </pre></div>
@@ -685,23 +687,25 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
 <section id="plotting-code">
 <h2>Plotting Code<a class="headerlink" href="#plotting-code" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
 <p>The Theta-E is the filled contouring and is contoured at every 1 K. CAPE is contoured as lines and plotted at every 100 J/Kg. The barbs are also plotted with the ax.barb function.</p>
+</section>
+<section id="vmin-and-vmax">
+<h2>Vmin and Vmax<a class="headerlink" href="#vmin-and-vmax" title="Link to this heading"><i class="fas fa-link"></i></a></h2>
+<p>The Theta-E colorbar is a static colorbar on which the bounds will be determined by the calculated maximum and minimum theta-E values over the entire subset region. There is a small buffer zone in between the max/min and the bounds of the colorbar, and an extra 3 degrees is added to both ends for padding purposes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_frame</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">fxx</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">extent</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">barb_step</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_frame</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">fxx</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">extent</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">barb_step</span><span class="p">,</span> <span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">init_time</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
     <span class="n">file_surface</span> <span class="o">=</span> <span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;surface&#39;</span><span class="p">][</span><span class="n">fxx</span><span class="p">]</span>
     <span class="n">file_pressure</span> <span class="o">=</span> <span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">][</span><span class="n">fxx</span><span class="p">]</span>
     <span class="n">file_wind</span> <span class="o">=</span> <span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;wind&#39;</span><span class="p">][</span><span class="n">fxx</span><span class="p">]</span>
     <span class="n">file_wind2</span> <span class="o">=</span> <span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;wind2&#39;</span><span class="p">][</span><span class="n">fxx</span><span class="p">]</span>
     <span class="n">file_cape</span> <span class="o">=</span> <span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;cape&#39;</span><span class="p">][</span><span class="n">fxx</span><span class="p">]</span>
     
-    <span class="c1">#Opening the datasets</span>
     <span class="n">ds_surface</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_surface</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
     <span class="n">ds_pressure</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_pressure</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
     <span class="n">ds_wind</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_wind</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
     <span class="n">ds_wind2</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_wind2</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
     <span class="n">ds_cape</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_cape</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
     
-    <span class="c1">#Conversion of variables to proper units</span>
     <span class="n">t2m</span> <span class="o">=</span> <span class="n">ds_surface</span><span class="o">.</span><span class="n">t2m</span> <span class="o">-</span> <span class="mf">273.15</span>  <span class="c1"># Convert to Celsius</span>
     <span class="n">d2m</span> <span class="o">=</span> <span class="n">ds_surface</span><span class="o">.</span><span class="n">d2m</span> <span class="o">-</span> <span class="mf">273.15</span>  <span class="c1"># Convert to Celsius</span>
     <span class="n">surface_pressure</span> <span class="o">=</span> <span class="n">ds_pressure</span><span class="o">.</span><span class="n">sp</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># Convert to hPa</span>
@@ -715,12 +719,10 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
     <span class="n">theta_e</span> <span class="o">=</span> <span class="n">mpcalc</span><span class="o">.</span><span class="n">equivalent_potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">)</span>
     <span class="n">theta_e</span> <span class="o">=</span> <span class="n">theta_e</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>  <span class="c1"># Strip units for plotting</span>
     
-    <span class="c1">#Calculation of 10 m wind</span>
     <span class="n">u10</span> <span class="o">=</span> <span class="n">ds_wind</span><span class="o">.</span><span class="n">u10</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">MS_TO_KNOTS</span>
     <span class="n">v10</span> <span class="o">=</span> <span class="n">ds_wind2</span><span class="o">.</span><span class="n">v10</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">MS_TO_KNOTS</span>
     <span class="n">wind_speed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">u10</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">v10</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     
-    <span class="c1">#Extraction of CAPE data</span>
     <span class="n">mucape</span> <span class="o">=</span> <span class="n">ds_cape</span><span class="o">.</span><span class="n">cape</span>
     
     <span class="c1"># Downsample the data</span>
@@ -747,7 +749,7 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
     <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
     
     <span class="c1"># Define levels for theta-e</span>
-    <span class="n">theta_e_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">theta_e_ds</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">theta_e_ds</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">theta_e_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     
     <span class="c1"># Plot filled contours for theta-e</span>
     <span class="n">contourf_theta_e</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
@@ -809,13 +811,12 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
             <span class="n">length</span><span class="o">=</span><span class="mi">6</span>
         <span class="p">)</span>
     
-    <span class="c1"># Set the titles with forecast hour</span>
-    <span class="n">forecast_hour</span> <span class="o">=</span> <span class="n">ds_surface</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>  <span class="c1"># Extract forecast hour from dataset time</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;Valid: </span><span class="si">{</span><span class="n">ds_surface</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M UTC </span><span class="si">%d</span><span class="s1"> %b %Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Theta-E and MUCAPE with 10m Wind Barbs (Forecast Hour: </span><span class="si">{</span><span class="n">fxx</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+    <span class="c1"># Set the titles with valid date and time</span>
+    <span class="n">valid_time</span> <span class="o">=</span> <span class="n">init_time</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="n">fxx</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">)</span>  <span class="c1"># Calculate valid time</span>
+    <span class="n">valid_time_str</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime_as_string</span><span class="p">(</span><span class="n">valid_time</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39; Hr:&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Valid: </span><span class="si">{</span><span class="n">valid_time_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">: Theta-E, MUCAPE, and 10m Wind Barbs&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
     
     <span class="c1"># Save the frame</span>
     <span class="n">frame_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;frame_</span><span class="si">{</span><span class="n">fxx</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
@@ -838,12 +839,38 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
     <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;frames&quot;</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
+    <span class="c1"># Convert date to numpy datetime64</span>
+    <span class="n">init_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    
     <span class="c1"># Download files</span>
     <span class="n">file_paths</span> <span class="o">=</span> <span class="n">download_files</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">max_fxx</span><span class="p">,</span> <span class="n">extent</span><span class="p">)</span>
     
+    <span class="c1"># Calculate the global theta-e range</span>
+    <span class="n">theta_e_min</span><span class="p">,</span> <span class="n">theta_e_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file_surface</span><span class="p">,</span> <span class="n">file_pressure</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;surface&#39;</span><span class="p">],</span> <span class="n">file_paths</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]):</span>
+        <span class="n">ds_surface</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_surface</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
+        <span class="n">ds_pressure</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_pressure</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;cfgrib&#39;</span><span class="p">,</span> <span class="n">filter_by_keys</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;stepType&#39;</span><span class="p">:</span> <span class="s1">&#39;instant&#39;</span><span class="p">})</span>
+        
+        <span class="n">t2m</span> <span class="o">=</span> <span class="n">ds_surface</span><span class="o">.</span><span class="n">t2m</span> <span class="o">-</span> <span class="mf">273.15</span>  <span class="c1"># Convert to Celsius</span>
+        <span class="n">d2m</span> <span class="o">=</span> <span class="n">ds_surface</span><span class="o">.</span><span class="n">d2m</span> <span class="o">-</span> <span class="mf">273.15</span>  <span class="c1"># Convert to Celsius</span>
+        <span class="n">surface_pressure</span> <span class="o">=</span> <span class="n">ds_pressure</span><span class="o">.</span><span class="n">sp</span> <span class="o">/</span> <span class="mi">100</span>  <span class="c1"># Convert to hPa</span>
+        
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">t2m</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">degC</span>
+        <span class="n">dewpoint</span> <span class="o">=</span> <span class="n">d2m</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">degC</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="n">surface_pressure</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">hPa</span>
+        <span class="n">theta_e</span> <span class="o">=</span> <span class="n">mpcalc</span><span class="o">.</span><span class="n">equivalent_potential_temperature</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">dewpoint</span><span class="p">)</span>
+        <span class="n">theta_e</span> <span class="o">=</span> <span class="n">theta_e</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>  <span class="c1"># Strip units for calculating min and max</span>
+
+        <span class="n">theta_e_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">theta_e_min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">theta_e</span><span class="p">))</span>
+        <span class="n">theta_e_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">theta_e_max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">theta_e</span><span class="p">))</span>
+    
+    <span class="n">theta_e_min</span> <span class="o">-=</span> <span class="mi">3</span>
+    <span class="n">theta_e_max</span> <span class="o">+=</span> <span class="mi">3</span>
+    
     <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">fxx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_fxx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">frame_filename</span> <span class="o">=</span> <span class="n">create_frame</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">fxx</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">extent</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">barb_step</span><span class="p">)</span>
+        <span class="n">frame_filename</span> <span class="o">=</span> <span class="n">create_frame</span><span class="p">(</span><span class="n">file_paths</span><span class="p">,</span> <span class="n">fxx</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">extent</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">barb_step</span><span class="p">,</span> <span class="n">theta_e_min</span><span class="p">,</span> <span class="n">theta_e_max</span><span class="p">,</span> <span class="n">init_time</span><span class="p">,</span> <span class="n">model_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">frame_filename</span><span class="p">:</span>
             <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">frame_filename</span><span class="p">))</span>
     
@@ -896,11 +923,10 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
 <p>Set your parameters to your liking and make your fancy GIF!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
-<span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;2024-06-16 12:00&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">date</span> <span class="o">=</span> <span class="s2">&quot;2024-06-17 12:00&quot;</span>
 <span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;hrrr&quot;</span>
 <span class="n">product</span> <span class="o">=</span> <span class="s2">&quot;prs&quot;</span>
-<span class="n">max_fxx</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Reduce the maximum forecast hour to reduce memory usage</span>
+<span class="n">max_fxx</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Reduce the maximum forecast hour to reduce memory usage</span>
 <span class="n">output_gif</span> <span class="o">=</span> <span class="s2">&quot;theta_e_mucape_wind_animation.gif&quot;</span>
 <span class="n">extent</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">95.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="mf">38.0</span><span class="p">,</span> <span class="mf">44.0</span><span class="p">)</span>
 <span class="n">step</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Adjust step size for downsampling</span>
@@ -917,17 +943,20 @@ The filepaths for the given forecast hours are retrieved, then the datasets them
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-16 12:00 UTC F00 ┊ GRIB2 @ aws ┊ IDX @ aws
-✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-16 12:00 UTC F01 ┊ GRIB2 @ aws ┊ IDX @ aws
-✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-16 12:00 UTC F02 ┊ GRIB2 @ aws ┊ IDX @ aws
-✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-16 12:00 UTC F03 ┊ GRIB2 @ aws ┊ IDX @ aws
-✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-16 12:00 UTC F04 ┊ GRIB2 @ aws ┊ IDX @ aws
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-17 12:00 UTC F00 ┊ GRIB2 @ aws ┊ IDX @ aws
+👨🏻‍🏭 Created directory: [C:\Users\thewe\data\hrrr\20240617]
+✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-17 12:00 UTC F01 ┊ GRIB2 @ aws ┊ IDX @ aws
+✅ Found ┊ model=hrrr ┊ product=prs ┊ 2024-Jun-17 12:00 UTC F02 ┊ GRIB2 @ aws ┊ IDX @ aws
 Animated GIF saved as theta_e_mucape_wind_animation.gif
 </pre></div>
 </div>
-<img alt="../../_images/cc625bb2d372d7a32186a46c115c114b827be6e36138d6a8f03c84f45c77070e.gif" src="../../_images/cc625bb2d372d7a32186a46c115c114b827be6e36138d6a8f03c84f45c77070e.gif" />
+<img alt="../../_images/a241ca05f6a9696b771ec199f80dd8209f05cfc6aa66b57fa9893c0400b4985f.gif" src="../../_images/a241ca05f6a9696b771ec199f80dd8209f05cfc6aa66b57fa9893c0400b4985f.gif" />
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Link to this heading"><i class="fas fa-link"></i></a></h1>
+<p>In this notebook, we learned how to plot custom variables using MetPy and Herbie from the HRRR model. We also learned how to create an animated GIF out of the images created.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1025,10 +1054,12 @@ Animated GIF saved as theta_e_mucape_wind_animation.gif
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Downsampling the data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smoothing-cape">Smoothing CAPE</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-code">Plotting Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vmin-and-vmax">Vmin and Vmax</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#function-for-the-creation-of-the-gif-from-the-created-frames-and-clean-up-of-frames-and-directory">Function for the creation of the GIF from the created frames and clean up of frames and directory</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-settings-and-creation-of-gif">Parameter settings and creation of GIF</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
 
   </nav></div>
