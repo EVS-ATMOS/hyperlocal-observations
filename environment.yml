@@ -23,6 +23,7 @@ dependencies:
   - siphon
   - scikit-learn
   - myst-nb
+  - myst-parser
   - pip
   - pip:
     - ambient-api
