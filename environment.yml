@@ -22,6 +22,7 @@ dependencies:
   - imageio
   - siphon
   - scikit-learn
+  - myst-nb
   - pip
   - pip:
     - ambient-api
